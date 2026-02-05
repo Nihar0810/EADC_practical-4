@@ -1,9 +1,16 @@
-const express = require('express');
-const app = express();
+var express = require ('express')
+const path = require('path')
+const app = express()
+app.use(express.static(path.join(__dirname+'/public')))
+console.log(__dirname)
+
 app.get('/', (req, res) => {
-    res.send('Hello, this is a code by Ramanpreet to test pipeline and this is the second version');
-  });
-  const port = process.env.PORT || 3000;
+  res.sendFile(path.join(__dirname+'/public', 'index.html','style.css'))
+})
+app.get('/home', (req, res) => {
+  res.send('Home page')
+})
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`API server listening on port ${port}`);
-});
+  console.log(`API server listening on port ${port}`)
+})
